@@ -1,0 +1,5 @@
+C:\Users\WiLi\Desktop\ASD\Termotanque.exe
+C:\Users\WiLi\Desktop\ASD\Termotanque.dll
+C:\Users\WiLi\Desktop\ASD\Termotanque.deps.json
+C:\Users\WiLi\Desktop\ASD\Termotanque.runtimeconfig.json
+C:\Users\WiLi\Desktop\ASD\Termotanque.pdb
