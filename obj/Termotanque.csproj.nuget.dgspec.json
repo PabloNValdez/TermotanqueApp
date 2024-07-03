@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\WiLi\\Desktop\\UNNE\\TeoriaComputacion2023\\TP-Integrador\\TERMO\\Termotanque\\Termotanque.csproj": {}
+    "C:\\Users\\pablo\\Desktop\\Integrador2024\\TermotanqueCode\\TermotanqueApp\\Termotanque.csproj": {}
   },
   "projects": {
-    "C:\\Users\\WiLi\\Desktop\\UNNE\\TeoriaComputacion2023\\TP-Integrador\\TERMO\\Termotanque\\Termotanque.csproj": {
+    "C:\\Users\\pablo\\Desktop\\Integrador2024\\TermotanqueCode\\TermotanqueApp\\Termotanque.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\WiLi\\Desktop\\UNNE\\TeoriaComputacion2023\\TP-Integrador\\TERMO\\Termotanque\\Termotanque.csproj",
+        "projectUniqueName": "C:\\Users\\pablo\\Desktop\\Integrador2024\\TermotanqueCode\\TermotanqueApp\\Termotanque.csproj",
         "projectName": "Termotanque",
-        "projectPath": "C:\\Users\\WiLi\\Desktop\\UNNE\\TeoriaComputacion2023\\TP-Integrador\\TERMO\\Termotanque\\Termotanque.csproj",
-        "packagesPath": "C:\\Users\\WiLi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\WiLi\\Desktop\\UNNE\\TeoriaComputacion2023\\TP-Integrador\\TERMO\\Termotanque\\obj\\",
+        "projectPath": "C:\\Users\\pablo\\Desktop\\Integrador2024\\TermotanqueCode\\TermotanqueApp\\Termotanque.csproj",
+        "packagesPath": "C:\\Users\\pablo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pablo\\Desktop\\Integrador2024\\TermotanqueCode\\TermotanqueApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\WiLi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pablo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,6 +35,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -58,7 +64,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
