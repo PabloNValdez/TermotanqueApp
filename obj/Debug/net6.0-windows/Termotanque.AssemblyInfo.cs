@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Termotanque")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+451037cfdaca1032712209f5373ab85e66d5dc15")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+652e03a7a2a50444ce24f3107d29ee4ea8659dd4")]
 [assembly: System.Reflection.AssemblyProductAttribute("Termotanque")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Termotanque")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

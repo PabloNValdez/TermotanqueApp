@@ -116,7 +116,18 @@ namespace Termotanque
             str = str + "0";
             txb_str.Text = str;
             isEncendido = false;
+
+            // Detener ambos temporizadores
+            timer.Stop();
+            temporizadorTermostato.Stop();
+
+            // Reiniciar los temporizadores y las variables relacionadas
+            tiempoRestante = 60;
+            tiempoRestanteTermostato = 120;
+            lblTemporizador.Text = "";
+            aguaCalentandose = false;
         }
+
 
         private void btn_inicio_1_Click(object sender, EventArgs e)
         {
