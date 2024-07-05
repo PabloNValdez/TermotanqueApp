@@ -9,6 +9,10 @@ namespace Termotanque
         private System.Windows.Forms.Timer timer;
         private int tiempoRestante = 60;
         private bool aguaCalentandose = false;
+        private System.Windows.Forms.Timer temporizadorTermostato;
+        private int tiempoRestanteTermostato = 120; // 2 minutos
+        private bool termostatoActivo = false;
+
 
         public Estados()
         {
@@ -34,6 +38,7 @@ namespace Termotanque
             btn_espera.Enabled = true;
             btn_espera_0.Enabled = true;
             btn_espera_1.Enabled = true;
+            btn_reset.Enabled = true;
         }
 
         private void InicializarTemporizador()
@@ -41,6 +46,10 @@ namespace Termotanque
             timer = new System.Windows.Forms.Timer();
             timer.Interval = 1000; // 1 segundo
             timer.Tick += Timer_Tick;
+
+            temporizadorTermostato = new System.Windows.Forms.Timer();
+            temporizadorTermostato.Interval = 1000; // 1 segundo
+            temporizadorTermostato.Tick += TemporizadorTermostato_Tick;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -65,10 +74,39 @@ namespace Termotanque
                 str = str + "0"; // Agregar a la secuencia de estados
                 txb_str.Text = str;
 
-                // Restablecer el estado de calentamiento del agua
-                aguaCalentandose = false;
+                // Iniciar el temporizador del termostato
+                tiempoRestanteTermostato = 120; // 2 minutos
+                temporizadorTermostato.Start();
+                termostatoActivo = true;
             }
         }
+
+        private void TemporizadorTermostato_Tick(object sender, EventArgs e)
+        {
+            tiempoRestanteTermostato--;
+            lblTemporizadorTermostato.Text = $"Tiempo restante termostato: {tiempoRestanteTermostato} segundos"; // Opcional, si quieres mostrar el tiempo restante del termostato
+
+            if (tiempoRestanteTermostato <= 0)
+            {
+                temporizadorTermostato.Stop();
+                termostatoActivo = false;
+
+                // Reiniciar el calentamiento automáticamente
+                btn_quemador.BackColor = Color.Firebrick;
+                btn_quemador.Text = "TEMP BAJA";
+                btn_espera.BackColor = Color.Firebrick;
+                btn_espera.Text = "TEMP BAJA";
+                str = str + "1"; // Agregar a la secuencia de estados
+                txb_str.Text = str;
+
+                tiempoRestante = 60;
+                lblTemporizador.Text = $"Tiempo restante: {tiempoRestante} segundos";
+                timer.Start();
+                aguaCalentandose = true;
+            }
+        }
+
+
 
         // INICIO
         private void btn_inicio_0_Click(object sender, EventArgs e)
@@ -185,12 +223,17 @@ namespace Termotanque
                 MessageBox.Show("Antes de poder usar el quemador, debes llenar el termotanque.", "Error");
                 return;
             }
-
-            // Si el agua está caliente y el quemador está en "TEMP DESEADA", mostrar alerta y no reiniciar temporizador
-            if (lblTemporizador.Text == "Agua caliente lista" && btn_quemador.Text == "TEMP DESEADA")
+            if (aguaCalentandose)
             {
-                MessageBox.Show("Actualmente estamos en el estado de espera.", "Información");
+                MessageBox.Show("Por favor, espere a que el temporizador termine antes de informar que la temperatura sigue baja.", "Información");
                 return;
+            }
+
+            // Detener el temporizador del termostato
+            if (termostatoActivo)
+            {
+                temporizadorTermostato.Stop();
+                termostatoActivo = false;
             }
 
             btn_quemador.BackColor = Color.Firebrick;
@@ -202,15 +245,13 @@ namespace Termotanque
             btn_espera.BackColor = Color.Firebrick;
             btn_espera.Text = "TEMP BAJA";
 
-            // Reiniciar el temporizador solo si no está corriendo
-            if (!aguaCalentandose)
-            {
-                tiempoRestante = 60;
-                lblTemporizador.Text = $"Tiempo restante: {tiempoRestante} segundos";
-                timer.Start();
-                aguaCalentandose = true;
-            }
+            // Reiniciar el temporizador
+            tiempoRestante = 60;
+            lblTemporizador.Text = $"Tiempo restante: {tiempoRestante} segundos";
+            timer.Start();
+            aguaCalentandose = true;
         }
+
 
         // ESPERA
         private void btn_espera_0_Click(object sender, EventArgs e)
@@ -247,12 +288,17 @@ namespace Termotanque
                 MessageBox.Show("Para pasar a la espera, debes alcanzar la temperatura deseada.", "Error");
                 return;
             }
-
-            // Si el agua está caliente y el quemador está en "TEMP DESEADA", mostrar alerta y no reiniciar temporizador
-            if (lblTemporizador.Text == "Agua caliente lista" && btn_quemador.Text == "TEMP DESEADA")
+            if (aguaCalentandose)
             {
-                MessageBox.Show("Actualmente estamos en el estado de espera.", "Información");
+                MessageBox.Show("Por favor, espere a que el temporizador termine antes de informar que la temperatura sigue baja.", "Información");
                 return;
+            }
+
+            // Detener el temporizador del termostato
+            if (termostatoActivo)
+            {
+                temporizadorTermostato.Stop();
+                termostatoActivo = false;
             }
 
             btn_espera.BackColor = Color.Firebrick;
@@ -264,14 +310,33 @@ namespace Termotanque
             btn_quemador.BackColor = Color.Firebrick;
             btn_quemador.Text = "TEMP BAJA";
 
-            // Reiniciar el temporizador solo si no está corriendo
-            if (!aguaCalentandose)
-            {
-                tiempoRestante = 60;
-                lblTemporizador.Text = $"Tiempo restante: {tiempoRestante} segundos";
-                timer.Start();
-                aguaCalentandose = true;
-            }
+            // Reiniciar el temporizador
+            tiempoRestante = 60;
+            lblTemporizador.Text = $"Tiempo restante: {tiempoRestante} segundos";
+            timer.Start();
+            aguaCalentandose = true;
+        }
+
+        // RESET
+        private void btn_reset_Click(object sender, EventArgs e)
+        {
+            str = "";
+            txb_str.Clear();
+            isEncendido = false;
+            tiempoRestante = 60;
+            timer.Stop();
+            aguaCalentandose = false;
+
+            btn_preparado.BackColor = Color.Transparent;
+            btn_preparado.Text = "INICIO";
+            btn_carga.BackColor = Color.Transparent;
+            btn_carga.Text = "CARGA";
+            btn_quemador.BackColor = Color.Transparent;
+            btn_quemador.Text = "QUEMADOR";
+            btn_espera.BackColor = Color.Transparent;
+            btn_espera.Text = "ESPERA";
+
+            lblTemporizador.Text = "";
         }
     }
 }
